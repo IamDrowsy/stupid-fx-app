@@ -13,37 +13,38 @@
                (.build (StageBuilder/create))
                (.setTitle "stupid-fx-app")
                (.setScene (Scene. (FXMLLoader/load (clojure.java.io/resource "stupid-app.fxml")))))))
-(run-now (.show stage))
 
 (def button-stream
   (r/filter #(= "rotateButton" (.getId (.getSource %))) spinal))
- 
+
 (def text-stream
   (r/filter #(= "buttonText" (.getId (.getSource %))) spinal))
 
 (defn rotate [node]
   (.setRotate node (+ (.getRotate node) 20)))
 
-(r/map (fn [event]
-         (-> (.getSource event)
-           (.getScene)
-           (.lookup "#buttonText")
-           rotate))
-       button-stream)
+(defn install-rotation []
+  (r/map (fn [event]
+           (-> (.getSource event)
+             (.getScene)
+             (.lookup "#buttonText")
+             rotate))
+         button-stream))
 
 (defn change-text-color [node text]
   (try (.setTextFill node (Color/valueOf text))
     (catch IllegalArgumentException e)))
- 
-(r/map (fn [event]
-         (let [text (.getText (.getSource event))]
-           (-> (.getSource event)
-             (.getScene)
-             (.lookup "#rotateButton")
-             (change-text-color text))))
-       text-stream)
 
+(defn install-colorchange []
+  (r/map (fn [event]
+           (let [text (.getText (.getSource event))]
+             (-> (.getSource event)
+               (.getScene)
+               (.lookup "#rotateButton")
+               (change-text-color text))))
+         text-stream))
 
-
-
-
+(defn start []
+  (run-now (.show stage))
+  (install-rotation)
+  (install-colorchange))
