@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?language clojure?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Button id="rotateButton" layoutX="267.0" layoutY="38.0" mnemonicParsing="false" onAction="(use 'stupid-fx-app.spinal) (push event)" text="Button" />
+    <TextField id="buttonText" layoutX="200.0" layoutY="189.0" onAction="(use 'stupid-fx-app.spinal) (push event)" prefWidth="200.0" />
+  </children>
+</AnchorPane>
